@@ -1,0 +1,10 @@
+{
+  "description": "This personal website showcases Kris's expertise in brand marketing and overseas operations, featuring case studies, performance metrics, and contact information for potential employers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

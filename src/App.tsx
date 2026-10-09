@@ -36,7 +36,7 @@ const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
 
 const filters = [
   ["featured", "精选 4 个"],
-  ["all", "全部 12 个"],
+  ["all", `全部 ${cases.length} 个`],
   ["gtm", "产品 GTM"],
   ["brand", "品牌营销"],
   ["global", "海外品牌运营"],
@@ -161,10 +161,10 @@ function App() {
     <main id="top">
       <section className="hero wrap">
         <p className="eyebrow">KRIS 谢园园 · BRAND MARKETING / GLOBAL OPERATIONS</p>
-        <h1>把产品价值，<br/><em>带进内容与市场。</em></h1>
+        <h1>从品牌策略，<br/><em>到业务结果。</em></h1>
         <p className="hero-intro">品牌营销与海外运营是我的主线。<br/>从产品表达、内容执行，到有效商机与项目交付。</p>
         <div className="hero-actions"><a className="button dark" href="#work">查看精选案例</a><a className="text-link" href={asset("Kris-Resume.pdf")} download>下载个人简历 <span>↗</span></a></div>
-        <div className="hero-note"><span>主要求职方向</span><strong>品牌营销 / 海外品牌运营</strong><span>延伸能力</span><strong>B 端获客 / 项目推进</strong></div>
+        <div className="hero-visual"><Media src="hero.jpg" alt="品牌职场生活方式 · 团队项目素材"/></div><div className="hero-note"><span>主要求职方向</span><strong>品牌营销 / 海外品牌运营</strong><span>延伸能力</span><strong>B 端获客 / 项目推进</strong></div>
       </section>
 
       <section className="proof-grid wrap" aria-label="核心能力与项目证据">
@@ -172,6 +172,12 @@ function App() {
         <article><span>02 / 内容获客</span><h2>6,622<small> 次</small><br/>团队私信进线</h2><p>2026.04.01—06.23 · 19 个账户团队汇总 · 平台事件计数，非成交数。</p></article>
         <article><span>03 / 项目推进</span><h2>27<small> 条</small><br/>个人项目记录</h2><p>2026.08.03 个人交接明细 · 阶段时点记录，其中 5 条标注交付。</p></article>
       </section>
+
+      <section className="section wrap capability-section" id="capabilities"><div className="section-heading"><div><p className="eyebrow">BRAND · PROJECT · SALES</p><h2>品牌目标，<br/>推进到业务结果。</h2></div><p>品牌市场营销 × 项目管理 × 销售增长<br/>数字分别对应履历、团队汇总和个人记录。</p></div><div className="capability-grid">
+        <article><span>01 / 品牌市场营销</span><h3>品牌与产品表达，接上渠道。</h3><p>品牌内容体系、产品 Brief、社媒矩阵与红人合作；从用户场景组织卖点，让品牌资产适配渠道触点。</p><strong>40+ 合作品牌 / 300+ 红人合作</strong><small>据个人简历整理的 VH 经历口径，非当前归档逐条统计；不作为本人独立完成的合作数量。</small></article>
+        <article><span>02 / 项目管理</span><h3>从跨团队协作，到项目交付。</h3><p>海外运营交付、KA 客户协同、团队管理与项目阶段跟进，将任务落实到责任人、时间和交付物。</p><strong>40 人交付团队 / 16 人销售团队</strong><small>据简历对应不同任职阶段；个人交接表另有 27 条项目阶段记录，其中 5 条标注交付。</small></article>
+        <article><span>03 / 销售成功经验</span><h3>让内容获客，进入商业推进。</h3><p>独立站运营、矩阵获客与 B 端销售协同，结合线索质量、项目阶段和商业结果复盘。</p><strong>20 万单月销售 / 188.6 万项目转化 / 700 万+ 累计销售</strong><small>分别为极地薄荷店铺、雅格项目与 IMS 阶段的简历口径；不同项目、周期与统计范围，不能相加，也不等于个人独立成交或 ROI。</small></article>
+      </div></section>
 
       <section className="section wrap" id="work">
         <div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK</p><h2>项目事实，<br/>比形容词更重要。</h2></div><p>产品表达 → 海外内容 → 矩阵获客 → 项目推进<br/>先看个人职责，再看行动与结果。</p></div>
@@ -191,6 +197,10 @@ function App() {
           <div className="chart-panel"><div className="chart-heading"><div><span>当前视图</span><h3>{currentInsight.title}</h3></div><p>{currentInsight.note}</p></div><ul>{currentInsight.rows.map(([label, value]) => <li key={label}><span>{label}</span><div className="bar-track" aria-hidden="true"><i style={{width: `${value / maxInsight * 100}%`}}/></div><strong>{value.toLocaleString("zh-CN")}</strong></li>)}</ul><p className="chart-foot">{currentInsight.foot}</p></div>
         </div>
       </section>
+
+      <section className="section wrap creator-section" id="influencer"><div className="section-heading"><div><p className="eyebrow">INFLUENCER MARKETING</p><h2>红人合作，<br/>连接产品与用户。</h2></div><p>把筛选、内容 Brief、寄样、发布回收与复盘<br/>组织成可追踪的合作链路。</p></div><div className="creator-gallery">{["vh-creator-1.jpg","vh-creator-2.jpg","vh-creator-3.jpg"].map((image,index)=><button key={image} onClick={event=>openImage([image,["职场穿搭场景","通勤生活方式","腕表产品细节"][index]],event.currentTarget)}><Media src={image} alt={["职场穿搭场景","通勤生活方式","腕表产品细节"][index]}/></button>)}</div><div className="creator-evidence"><strong>47<small>候选名单记录</small></strong><strong>12<small>发布记录涉及账号</small></strong><strong>24<small>发布链接记录</small></strong></div><p className="evidence-note">当前归档统计，候选不等于签约、发布链接不等于独立合作人数；个人执行职责范围需要本人确认。</p><div className="creator-method"><article><span>01 / 选择谁</span><h3>先看受众与场景。</h3><p>结合所在地、受众任务、内容质量、品牌适配与合作成本筛选；粉丝量只是参考。</p></article><article><span>02 / 如何合作</span><h3>把 Brief 变成可执行交付。</h3><p>明确产品利益点、内容形式、寄样时间、发布节点和授权范围，逐项记录合作状态。</p></article><article><span>03 / 如何判断</span><h3>回收发布，再看业务信号。</h3><p>保留账号、发布链接与素材，区分曝光、互动、点击和订单归因；资料缺失时不计算 ROI。</p></article></div><button className="button dark" onClick={event=>openCase(cases.find(c=>c.id==="vh-influencer")!,event.currentTarget)}>查看红人合作案例 ＋</button></section>
+
+      <section className="section materials-section" id="materials"><div className="wrap"><div className="section-heading"><div><p className="eyebrow">PROJECT MATERIALS / 原始项目资料</p><h2>用项目资料，<br/>展示落地能力。</h2></div><p>品牌产品内容、红人合作与项目交付。<br/>点击查看原图；团队视觉资产与个人职责分开说明。</p></div><div className="material-grid">{[["vh-brief-original.jpg","产品 Brief","产品信息与功能利益表达"],["vh-products-original.jpg","产品图册","系列、选品与品牌资料"],["vh-campaign-original.jpg","返工季 Campaign","策划与页面方案，非上线业绩"],["vh-sop-original.jpg","品牌协作资料","跨团队流程与内容协同"],["vh-creator-2.jpg","红人生活方式素材","品牌团队合作内容，个人范围待确认"],["wantai-spec.jpg","B 端项目规格","项目沟通、选品与交付资料"]].map(([image,title,caption])=><figure key={image}><button onClick={event=>openImage([image,`${title} · ${caption}`],event.currentTarget)}><Media src={image} alt={title}/><span>查看原图 ＋</span></button><figcaption><strong>{title}</strong><small>{caption}</small></figcaption></figure>)}</div></div></section>
 
       <section className="section wrap demo-section" aria-labelledby="demo-title">
         <div className="section-heading"><div><p className="eyebrow">PRODUCT STORY / VH 场景演示</p><h2 id="demo-title">从产品功能，<br/>走进使用场景。</h2></div><p>作品集展示交互，使用团队原始项目素材。<br/>非原项目已有 App 功能，也不是 A/B 测试结果。</p></div>

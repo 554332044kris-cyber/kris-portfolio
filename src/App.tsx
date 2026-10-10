@@ -94,9 +94,22 @@ const experiences = [
 ];
 
 function Media({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  const [attempt, setAttempt] = useState(0);
   const [failed, setFailed] = useState(false);
-  if (failed) return <div className={`media-fallback ${className}`} role="img" aria-label={`${alt}（素材待补传）`}><span>PROJECT VISUAL</span><strong>{alt}</strong><small>原始图片素材待补传</small></div>;
-  return <img className={className} src={asset(src)} alt={alt} loading="lazy" draggable={false} onError={() => setFailed(true)} />;
+  useEffect(() => { setAttempt(0); setFailed(false); }, [src]);
+  useEffect(() => {
+    const retry = () => { setFailed(false); setAttempt(value => value + 1); };
+    window.addEventListener("online", retry);
+    return () => window.removeEventListener("online", retry);
+  }, []);
+  const onError = () => {
+    if (attempt < 2) window.setTimeout(() => setAttempt(value => value + 1), 700 * (attempt + 1));
+    else setFailed(true);
+  };
+  if (failed) return <div className={`media-fallback ${className}`} role="img" aria-label={alt}><strong>{alt}</strong><small>图片暂未加载，请点击重试</small><span onClick={event => { event.stopPropagation(); setAttempt(0); setFailed(false); }}>重新加载图片 ↻</span></div>;
+  const lightweight = src.replace(/\.(jpg|png)$/i, ".webp");
+  const url = asset(attempt === 0 ? lightweight : src) + (attempt > 1 ? `?retry=${attempt}` : "");
+  return <img key={`${src}-${attempt}`} className={className} src={url} alt={alt} loading="eager" decoding="async" draggable={false} onError={onError} />;
 }
 
 function CaseVisual({ study }: { study: CaseStudy }) {
